@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selah 다운로드</title>
+<meta name="description" content="셀라 — 묵주기도 기록 앱 안드로이드 APK 다운로드">
+<style>
+  :root {
+    --navy: #2B3A67;
+    --navy-dark: #1E2A4D;
+    --gold: #C9A227;
+    --gold-light: #E6CF7A;
+    --ivory: #F6F3EC;
+    --ink: #2A2D3A;
+    --muted: #6B6F80;
+    --card: #FFFFFF;
+    --line: #E4DFD2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR",
+      "Malgun Gothic", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  .hero {
+    background: linear-gradient(180deg, var(--navy-dark), var(--navy));
+    color: #fff;
+    text-align: center;
+    padding: 48px 16px 64px;
+  }
+  .hero .logo { font-size: 30px; font-weight: 800; letter-spacing: 6px; margin: 0; }
+  .hero .sub { margin: 6px 0 0; color: var(--gold-light); font-size: 15px; }
+  main { max-width: 480px; margin: -40px auto 0; padding: 0 16px 48px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(43, 58, 103, 0.06);
+  }
+  .version { margin: 0; font-size: 20px; font-weight: 700; color: var(--navy); }
+  .meta { margin: 2px 0 16px; color: var(--muted); font-size: 14px; }
+  .download {
+    display: block;
+    text-align: center;
+    background: var(--gold);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .download:active { opacity: 0.85; }
+  .note { margin: 10px 0 0; text-align: center; font-size: 13px; color: var(--muted); }
+  h2 { margin: 0 0 10px; font-size: 16px; color: var(--navy); }
+  .changes ul, ol { margin: 0; padding-left: 20px; }
+  .changes li, ol li { margin-bottom: 6px; font-size: 15px; }
+  .changes h3 { margin: 8px 0 4px; font-size: 15px; }
+  .changes p { margin: 0 0 6px; font-size: 15px; }
+  .empty { color: var(--muted); font-size: 14px; }
+  .warn { color: var(--navy); font-weight: 700; }
+  footer { text-align: center; font-size: 13px; }
+  footer a { color: var(--navy); }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <p class="logo">SELAH</p>
+    <p class="sub">셀라 · 묵주기도 기록 앱</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <p class="version" id="version">최신 버전</p>
+      <p class="meta" id="meta">안드로이드용 APK</p>
+      <a class="download" href="https://github.com/SeokHunPark/Selah-dist/releases/latest/download/selah.apk">
+        APK 다운로드
+      </a>
+      <p class="note">안드로이드 전용 · 이미 설치돼 있으면 덮어서 업데이트됩니다</p>
+    </section>
+
+    <section class="card changes">
+      <h2>변경 내역</h2>
+      <div id="changes"><p class="empty">불러오는 중…</p></div>
+    </section>
+
+    <section class="card">
+      <h2>설치 방법</h2>
+      <ol>
+        <li>위의 <b>APK 다운로드</b> 버튼을 누릅니다.</li>
+        <li>다운로드가 끝나면 알림이나 다운로드 폴더에서 <b>selah.apk</b>를 엽니다.</li>
+        <li>‘출처를 알 수 없는 앱’ 설치 허용을 물으면 허용한 뒤 <b>설치</b>를 누릅니다.</li>
+        <li><span class="warn">업데이트할 때 기존 앱을 삭제하지 마세요.</span> 그대로 덮어 설치해야 기도 기록이 유지됩니다.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <a href="https://github.com/SeokHunPark/Selah-dist/releases">이전 버전 보기</a>
+    </footer>
+  </main>
+
+<script>
+  // 최신 릴리스 정보로 버전·날짜·변경 내역을 채운다. 실패해도 다운로드 버튼은 고정 링크라 동작한다.
+  function renderBody(body, el) {
+    el.textContent = '';
+    let list = null;
+    for (const raw of (body || '').split('\n')) {
+      const line = raw.trim();
+      if (!line) { list = null; continue; }
+      if (/^#+\s/.test(line)) {
+        list = null;
+        if (/^##\s*변경 내역$/.test(line)) continue; // 카드 제목과 중복
+        const h = document.createElement('h3');
+        h.textContent = line.replace(/^#+\s*/, '');
+        el.appendChild(h);
+      } else if (/^[-*]\s/.test(line)) {
+        if (!list) { list = document.createElement('ul'); el.appendChild(list); }
+        const li = document.createElement('li');
+        li.textContent = line.replace(/^[-*]\s*/, '');
+        list.appendChild(li);
+      } else {
+        list = null;
+        const p = document.createElement('p');
+        p.textContent = line;
+        el.appendChild(p);
+      }
+    }
+    if (!el.childNodes.length) el.innerHTML = '<p class="empty">변경 내역이 없습니다.</p>';
+  }
+
+  fetch('https://api.github.com/repos/SeokHunPark/Selah-dist/releases/latest')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(rel => {
+      document.getElementById('version').textContent =
+        '버전 ' + rel.tag_name.replace(/^v/, '').replace('-', ' (빌드 ') + ')';
+      const apk = (rel.assets || []).find(a => a.name === 'selah.apk');
+      const date = new Date(rel.published_at).toLocaleDateString('ko-KR',
+        { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('meta').textContent =
+        date + ' 배포' + (apk ? ' · ' + (apk.size / 1048576).toFixed(1) + 'MB' : '');
+      renderBody(rel.body, document.getElementById('changes'));
+    })
+    .catch(() => {
+      document.getElementById('changes').innerHTML =
+        '<p class="empty">변경 내역을 불러오지 못했습니다. 다운로드는 정상적으로 됩니다.</p>';
+    });
+</script>
+</body>
+</html>
