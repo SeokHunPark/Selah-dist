@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Selah 다운로드</title>
-<meta name="description" content="셀라 — 묵주기도 기록 앱 안드로이드 APK 다운로드">
+<meta name="description" content="셀라 — 기도 기록 앱 안드로이드 APK 다운로드">
 <style>
   :root {
     --navy: #2B3A67;
@@ -65,6 +65,25 @@
   .changes p { margin: 0 0 6px; font-size: 15px; }
   .empty { color: var(--muted); font-size: 14px; }
   .warn { color: var(--navy); font-weight: 700; }
+  .steps { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+  .steps > li { position: relative; padding-left: 38px; margin-bottom: 16px; font-size: 15px; counter-increment: step; }
+  .steps > li::before {
+    content: counter(step); position: absolute; left: 0; top: 0;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--navy); color: #fff; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps > li:last-child { margin-bottom: 0; }
+  .tip { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
+  .btn { display: inline-block; padding: 0 6px; border: 1px solid var(--line); border-radius: 6px;
+    background: var(--ivory); font-weight: 700; color: var(--navy); white-space: nowrap; }
+  .alert { background: #FBF6E6; border: 1px solid #E3D29A; border-radius: 12px; padding: 12px 14px;
+    font-size: 15px; margin-bottom: 16px; }
+  .alert b { color: #8A6D10; }
+  .lead { margin: 0 0 14px; font-size: 15px; color: var(--muted); }
+  .faq h3 { margin: 14px 0 4px; font-size: 15px; color: var(--ink); }
+  .faq h3:first-of-type { margin-top: 0; }
+  .faq p { margin: 0; font-size: 15px; }
   footer { text-align: center; font-size: 13px; }
   footer a { color: var(--navy); }
 </style>
@@ -72,7 +91,7 @@
 <body>
   <header class="hero">
     <p class="logo">SELAH</p>
-    <p class="sub">셀라 · 묵주기도 기록 앱</p>
+    <p class="sub">셀라 · 기도 기록 앱</p>
   </header>
 
   <main>
@@ -91,13 +110,50 @@
     </section>
 
     <section class="card">
-      <h2>설치 방법</h2>
-      <ol>
-        <li>위의 <b>APK 다운로드</b> 버튼을 누릅니다.</li>
-        <li>다운로드가 끝나면 알림이나 다운로드 폴더에서 <b>selah.apk</b>를 엽니다.</li>
-        <li>‘출처를 알 수 없는 앱’ 설치 허용을 물으면 허용한 뒤 <b>설치</b>를 누릅니다.</li>
-        <li><span class="warn">업데이트할 때 기존 앱을 삭제하지 마세요.</span> 그대로 덮어 설치해야 기도 기록이 유지됩니다.</li>
+      <h2>처음 설치하기</h2>
+      <p class="lead">셀라는 아직 플레이 스토어에 없어서, 이 페이지에서 설치 파일을 받아 직접 설치합니다.
+        안드로이드 휴대폰(갤럭시 등)에서만 설치할 수 있어요. 처음 한 번만 몇 가지를 허용하면 됩니다.</p>
+      <ol class="steps">
+        <li>이 페이지를 <b>휴대폰의 인터넷 앱</b>(삼성 인터넷이나 크롬)으로 엽니다.
+          <span class="tip">카카오톡에서 링크를 눌러 열었다면 화면 위나 아래의 <span class="btn">⋮</span> 메뉴에서
+            <b>다른 브라우저로 열기</b>를 누르세요. 카카오톡 안에서는 다운로드가 잘 안 될 수 있어요.</span></li>
+        <li>맨 위의 금색 <span class="btn">APK 다운로드</span> 버튼을 누릅니다.
+          <span class="tip">“파일이 기기에 해로울 수 있다”는 안내가 나오면 <span class="btn">다운로드</span> 또는
+            <span class="btn">그래도 다운로드</span>를 누르세요. 휴대폰이 스토어 밖에서 받은 파일에 늘 띄우는 안내입니다.</span></li>
+        <li>다운로드가 끝나면 화면 아래에 뜨는 <span class="btn">열기</span>를 누릅니다.
+          <span class="tip">버튼을 놓쳤다면 화면 맨 위를 아래로 쓸어내려 알림에서 <b>selah.apk</b>를 누르거나,
+            <b>내 파일</b> 앱 › <b>다운로드</b>에서 <b>selah.apk</b>를 누르세요.</span></li>
+        <li>“이 출처의 앱은 설치할 수 없다”는 안내가 나오면 <span class="btn">설정</span>을 누르고,
+          <b>이 출처 허용</b>(또는 <b>앱 설치 허용</b>)을 켠 뒤 뒤로 가기를 누릅니다.
+          <span class="tip">처음 한 번만 나옵니다. 지금 쓰는 인터넷 앱에 설치를 허락하는 것이에요.</span></li>
+        <li><span class="btn">설치</span>를 누릅니다.
+          <span class="tip">“Play 프로텍트”가 앱을 검사하거나 막았다는 창이 나오면 <span class="btn">세부정보 더보기</span>를 누른 뒤
+            <span class="btn">무시하고 설치</span>를 누르세요. 스토어에 없는 앱이라 나오는 안내입니다.</span></li>
+        <li>설치가 끝나면 <span class="btn">열기</span>를 누릅니다. 다음부터는 앱 목록의 <b>selah</b> 아이콘으로 엽니다.</li>
       </ol>
+    </section>
+
+    <section class="card">
+      <h2>업데이트하기</h2>
+      <div class="alert"><b>기존 앱을 지우지 마세요.</b> 지우면 그동안의 기도 기록이 모두 사라집니다.
+        새 파일을 그대로 덮어 설치하면 기록은 그대로 남아요.</div>
+      <ol class="steps">
+        <li>이 페이지에서 다시 <span class="btn">APK 다운로드</span>를 누르고, 처음처럼 <span class="btn">열기</span>를 누릅니다.</li>
+        <li>“이 앱을 업데이트하시겠습니까?” 같은 창이 나오면 <span class="btn">업데이트</span>(또는 <span class="btn">설치</span>)를 누릅니다.</li>
+        <li>잘 바뀌었는지 보려면 휴대폰의 <b>설정</b> 앱 › <b>애플리케이션</b> › <b>selah</b>에서 버전이 위의 최신 버전과 같은지 확인합니다.</li>
+      </ol>
+    </section>
+
+    <section class="card faq">
+      <h2>잘 안 될 때</h2>
+      <h3>다운로드 버튼을 눌러도 아무 일이 없어요</h3>
+      <p>카카오톡·문자 안에서 열린 화면일 수 있어요. 삼성 인터넷이나 크롬으로 이 페이지를 다시 열어 주세요.</p>
+      <h3>받은 파일을 못 찾겠어요</h3>
+      <p><b>내 파일</b> 앱(또는 <b>파일</b> 앱)을 열고 <b>다운로드</b>에 들어가면 <b>selah.apk</b>가 있어요. 같은 이름이 여러 개면 가장 최근 것을 누르세요.</p>
+      <h3>‘앱이 설치되지 않았습니다’라고 나와요</h3>
+      <p>저장 공간이 부족하거나 다운로드가 끝까지 되지 않았을 수 있어요. 파일을 다시 받아 설치해 보세요. 그래도 안 되면 기존 앱은 지우지 말고 알려 주세요.</p>
+      <h3>아이폰에서도 되나요?</h3>
+      <p>아직은 안드로이드 휴대폰에서만 설치할 수 있어요.</p>
     </section>
 
     <footer>
